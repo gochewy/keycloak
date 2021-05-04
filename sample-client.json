@@ -1,0 +1,114 @@
+{
+    "clientId": "sample-client",
+    "name": "Sample Client",
+    "rootUrl": "http://client.ecdev.site",
+    "adminUrl": "http://client.ecdev.site",
+    "surrogateAuthRequired": false,
+    "enabled": true,
+    "alwaysDisplayInConsole": false,
+    "clientAuthenticatorType": "client-secret",
+    "redirectUris": [
+        "http://client.ecdev.site/*",
+        "http://localhost:3000/*"
+    ],
+    "webOrigins": [
+        "http://client.ecdev.site",
+        "http://localhost:3000/*",
+        "*"
+    ],
+    "notBefore": 0,
+    "bearerOnly": false,
+    "consentRequired": false,
+    "standardFlowEnabled": true,
+    "implicitFlowEnabled": true,
+    "directAccessGrantsEnabled": true,
+    "serviceAccountsEnabled": false,
+    "publicClient": true,
+    "frontchannelLogout": false,
+    "protocol": "openid-connect",
+    "attributes": {
+        "saml.assertion.signature": "false",
+        "saml.force.post.binding": "false",
+        "saml.multivalued.roles": "false",
+        "saml.encrypt": "false",
+        "backchannel.logout.revoke.offline.tokens": "false",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "backchannel.logout.session.required": "true",
+        "client_credentials.use_refresh_token": "false",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "saml.onetimeuse.condition": "false"
+    },
+    "authenticationFlowBindingOverrides": {},
+    "fullScopeAllowed": true,
+    "nodeReRegistrationTimeout": -1,
+    "protocolMappers": [
+        {
+            "name": "Hasura Default Role",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-hardcoded-claim-mapper",
+            "consentRequired": false,
+            "config": {
+                "claim.value": "user",
+                "userinfo.token.claim": "true",
+                "id.token.claim": "true",
+                "access.token.claim": "true",
+                "claim.name": "https://hasura\\.io/jwt/claims.x-hasura-default-role",
+                "jsonType.label": "String",
+                "access.tokenResponse.claim": "false"
+            }
+        },
+        {
+            "name": "Hasura Allowed Roles",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-hardcoded-claim-mapper",
+            "consentRequired": false,
+            "config": {
+                "claim.value": "[\"user\"]",
+                "userinfo.token.claim": "true",
+                "id.token.claim": "true",
+                "access.token.claim": "true",
+                "claim.name": "https://hasura\\.io/jwt/claims.x-hasura-allowed-roles",
+                "jsonType.label": "JSON",
+                "access.tokenResponse.claim": "false"
+            }
+        },
+        {
+            "name": "Hasura User Id",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "consentRequired": false,
+            "config": {
+                "userinfo.token.claim": "true",
+                "user.attribute": "id",
+                "id.token.claim": "true",
+                "access.token.claim": "true",
+                "claim.name": "https://hasura\\.io/jwt/claims.x-hasura-user-id",
+                "jsonType.label": "String"
+            }
+        }
+    ],
+    "defaultClientScopes": [
+        "web-origins",
+        "role_list",
+        "profile",
+        "roles",
+        "email"
+    ],
+    "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+    ],
+    "access": {
+        "view": true,
+        "configure": true,
+        "manage": true
+    }
+}
